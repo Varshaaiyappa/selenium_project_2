@@ -31,6 +31,7 @@ import org.testng.annotations.Test;
 		
 	}
 	
+	
 	@SuppressWarnings("deprecation")
 	@Test
 	public void testcase1() throws Exception {
@@ -45,9 +46,9 @@ import org.testng.annotations.Test;
 			System.out.println("webpage is not visible");
 		}
 		
-
-		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds('5'));
-			p.signup.click();
+		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+		p.signup.click();
+	
 			
 			
 			if(p.signup_heading.isDisplayed()) {
