@@ -17,30 +17,36 @@ import org.testng.annotations.Test;
 	public class UserRegistration {
 		
 		WebDriver driver;
-		@BeforeMethod
-		public void launchWeb() throws Exception {
-			System.setProperty("webdriver.chrome.driver", "C:\\Users\\Varsha\\OneDrive\\Desktop\\jar files\\chromedriverfolder\\chromedriver.exe");
-		    driver = new ChromeDriver();
-			driver.get("https://automationexercise.com/");
-			driver.manage().window().maximize();
-			Thread.sleep(2500);
+	
+	@BeforeMethod
+	public void launchWeb() throws Exception {
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Varsha\\OneDrive\\Desktop\\jar files\\chromedriverfolder\\chromedriver.exe");
+	    driver = new ChromeDriver();
+	    driver.get("https://automationexercise.com/");
+		driver.manage().window().maximize();
+		driver.manage().deleteAllCookies();
+		
+	 
+		driver.navigate().refresh();
+		
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testcase1() throws Exception {
+		
+		PageObjModel p = PageFactory.initElements(driver,PageObjModel.class );
+	
+		if(driver.getTitle().contains("Automation")) {
+        System.out.println("the webpage is visible");				
+		}
+		else
+		{
+			System.out.println("webpage is not visible");
 		}
 		
-		@SuppressWarnings("deprecation")
-		@Test
-		public void testcase1() throws Exception {
-			
-			PageObjModel p = PageFactory.initElements(driver,PageObjModel.class );
-		
-			if(driver.getTitle().contains("Automation")) {
-            System.out.println("the webpage is visible");				
-			}
-			else
-			{
-				System.out.println("webpage is not visible");
-			}
- 
-			driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+
+		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds('5'));
 			p.signup.click();
 			
 			
